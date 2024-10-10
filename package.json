@@ -10,7 +10,7 @@
     "api:all": "npm run api:clean; npm run api:build; npm run api:run",
     "nginx:clean": "docker stop feature-nginx; docker rmi feature/nginx",
     "nginx:build": "docker buildx build -f nginx/Dockerfile -t feature/nginx ./nginx",
-    "nginx:run": "docker run -d --rm --name feature-nginx -p 9090:8080 feature/nginx",
+    "nginx:run": "docker run -d --rm --name feature-nginx -p 80:8080 feature/nginx",
     "nginx:all": "npm run nginx:clean; npm run nginx:build; npm run nginx:run"
   },
   "keywords": [],
