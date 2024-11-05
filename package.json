@@ -12,14 +12,19 @@
     "nginx:build": "docker buildx build -f nginx/Dockerfile -t feature/nginx ./nginx",
     "nginx:run": "docker run -d --rm --name feature-nginx --network feature-net -p 80:8080 feature/nginx",
     "nginx:all": "npm run nginx:clean; npm run nginx:build; npm run nginx:run",
-    "docker: connect:exo5":"docker run -d --rm --network feature-net --name redis-server -v feature-redis-data:/data redis"
+    "docker: connect:exo5": "docker run -d --rm --network feature-net --name redis-server -v feature-redis-data:/data redis",
+    "test" :"jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "readme test",
   "dependencies": {
     "fastify": "^5.0.0",
     "redis": "^4.7.0"
+  },
+
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
