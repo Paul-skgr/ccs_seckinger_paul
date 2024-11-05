@@ -1,27 +1,24 @@
-// Fonction d'évaluation avec des continuations
-function evalExpr(expr, env, k) {
+// Fonction d'évaluation avec des continuations cont la continuation
+function evalExpr(expr, env, continuation) {
   if (typeof expr === 'number') {
-    // Si l'expression est un nombre, on l'envoie directement à la continuation
-    return k(expr);
+    return continuation(expr);
   } else if (typeof expr === 'string') {
-    // Si l'expression est une variable, on récupère sa valeur dans l'environnement
-    return k(env[expr]);
+    return continuation(env[expr]);
   } else if (Array.isArray(expr)) {
-    // Si c'est une addition, on suppose que l'expression est du type ['+', e1, e2]
-    if (expr[0] === '+') {
-      // Évaluation de e1
-      return evalExpr(expr[1], env, function(v1) {
-        // Évaluation de e2
-        return evalExpr(expr[2], env, function(v2) {
-          // On applique la continuation à la somme de v1 et v2
-          return k(v1 + v2);
-        });
-      });
-    }
+    return evaluateOperation(expr, env, continuation)
   }
 }
 
-// Exemple d'utilisation
+//Evaluation de l'operation
+function evaluateOperation(expr, env, continuation) {
+    if (expr[0] === '+') {
+        return evalExpr(expr[1], env, function(v1) {
+        return evalExpr(expr[2], env, function(v2) {
+        return continuation(v1 + v2);
+        });
+        });
+    }
+}
 
 // Environnement contenant des variables
 const env = { x: 10, y: 20 };
