@@ -26,7 +26,7 @@ test("transfer effectue", () => {
 
 
     jest.spyOn(bankTransfer, "transfer").mockReturnValue(expectedAmount);
-    jest.spyOn(bankDAO, "debitAccount").mockReturnValue(expectedAmount);
+    jest.spyOn(bankDAO, "debitAccount").mockResolvedValue(expectedAmount);
 
     const amount=bank.transferMoney(idAccount, expectedAmount);
 
@@ -34,4 +34,21 @@ test("transfer effectue", () => {
     expect(amount).toBe(expectedAmount);
 
     expect(jest.spyOn(bankDAO, "debitAccount")).toHaveBeenCalledWith(idAccount, expectedAmount);
+    
+    bankDAO.debitAccount.mockRestore();
 });
+
+test("Transfer not executed", async () => {
+    const spy=jest.spyOn(bank, "getBalance");
+    const idAccount=123;
+    const amount=1000;
+    const expectedBalance=100;
+
+    jest.spyOn(bankTransfer, "transfer").mockReturnValue(null);
+    jest.spyOn(bankDAO, "debitAccount").mockRejectedValue(new console.error("transfer failed"));
+    
+    await bank.transferMoney(idAccount, expectedAmount);
+    expect(jest.spyOn(bankDAO, "debitAccount")).toHaveBeenCalledWith(idAccount, expectedAmount);
+});
+
+
