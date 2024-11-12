@@ -12,12 +12,20 @@ function retrieveAccountList(deletedItem){
         return ACCOUNT_LIST;
 };
 
-
+function updateAccount(account){
+    const index = ACCOUNT_LIST.findIndex(acc => acc.id === account.id);
+    if (index !== -1) {
+        ACCOUNT_LIST[index] = { ...ACCOUNT_LIST[index], ...account };
+        console.log('Base de données après la mise à jour :', ACCOUNT_LIST);
+    } else {
+        console.error(`Compte avec id ${account.id} introuvable.`);
+    }
+};
 
 export const accountDAO = {
   insertAccount,
   retrieveAccountList,
-  updateAccount(account) {},
+  updateAccount,
   retrieveAccount(id) {},
 };
 

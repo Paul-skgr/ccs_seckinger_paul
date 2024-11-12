@@ -1,10 +1,10 @@
 import { accountDAO } from "./accountDAO.mjs";
 import { Account } from "./account.mjs";
-import { ACCOUNT_LIST } from "./database.mjs";
 
 function addAccount(lastName, firstName) {
     const account = new Account(null, lastName, firstName);
     accountDAO.insertAccount(account);
+    return account;
 };
 
 
@@ -12,9 +12,16 @@ function getAccountList(){
     return accountDAO.retrieveAccountList(false);
 };
 
+function saveAccount(id, lastName, firstName){
+    const account = accountDAO.retrieveAccountList(true).find(acc => acc.id === id);
+    account.lastName=lastName;
+    account.firstName=firstName;
+    accountDAO.updateAccount(account);
+};
+
 export const accountService = {
   addAccount,
   getAccountList,
-  saveAccount(id, lastName, firstName) {},
+  saveAccount,
   getAccount(id) {},
 };
