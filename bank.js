@@ -7,7 +7,7 @@ function getBalance(idAccount){
 };
 
 async function transferMoney(accountId, amount){
-    bankTransfer.transfer(accountId, amount).then(()=>{
+    new Promise bankTransfer.transfer(accountId, amount).then(()=>{
         bankDAO.debitAccount(accountId,amount);
         console.log("transfering ${amount} to ${accountId}");
     })
