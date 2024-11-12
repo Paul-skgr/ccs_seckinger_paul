@@ -22,10 +22,20 @@ function updateAccount(account){
     }
 };
 
+function retrieveAccount(id) {
+    const account = ACCOUNT_LIST.find(account => account.id === id);
+    if (account) {
+        const { firstName, lastName, ...rest } = account;
+        const name = `${firstName} ${lastName}`;
+        return { ...rest, name }; 
+    }
+    return null;
+}
+
 export const accountDAO = {
   insertAccount,
   retrieveAccountList,
   updateAccount,
-  retrieveAccount(id) {},
+  retrieveAccount,
 };
 

@@ -19,9 +19,14 @@ function saveAccount(id, lastName, firstName){
     accountDAO.updateAccount(account);
 };
 
+
+function getAccount(id) {
+    return accountDAO.retrieveAccount(id); 
+};
+
 export const accountService = {
   addAccount,
   getAccountList,
   saveAccount,
-  getAccount(id) {},
+  getAccount,
 };

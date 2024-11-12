@@ -7,3 +7,6 @@ const account = accountService.addAccount("paul", "seckinger");
 console.log(accountService.getAccountList());
 
 console.log(accountService.saveAccount(account.id, "lastName", "firstName"));
+
+
+console.log(accountService.getAccount("Compte récupéré :", account.id));
