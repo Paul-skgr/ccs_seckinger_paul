@@ -1,6 +1,6 @@
 import { ACCOUNT_LIST } from "./database.mjs";
-
 import { queryDatabase } from "./queryDatabase.mjs";
+import { accountCache } from "./cache.mjs";
 
 function retrieveAccountList(deletedItem){
     if (deletedItem == "creationDate"){
@@ -13,6 +13,9 @@ function retrieveAccountList(deletedItem){
 }
 
 function retrieveAccount(searchId) {
+    if (accountCache[searchId]) {
+        return accountCache[searchId];
+    }
     const account = ACCOUNT_LIST.find(({ id }) => id === searchId);
     if (account) {
         return {

@@ -1,6 +1,7 @@
 import { accountCommand } from "./accountCommand.mjs";
 import { accountQuery } from "./accountQuery.mjs";
 import {ACCOUNT_LIST} from "./database.mjs";
+import { accountCache } from "./cache.mjs";
 
 console.log("cli");
 accountCommand.addAccount("Paul","Seckinger");
@@ -13,3 +14,5 @@ console.log(accountList);
 const savedAccount = accountCommand.saveAccount(ACCOUNT_LIST[0].id, "Gerard", "Langlet");
 
 console.log(savedAccount);
+
+console.log(accountCache);
