@@ -1,4 +1,5 @@
 import { ACCOUNT_LIST } from "./database.mjs";
+import { accountCache } from "./cache.mjs";
 
 function insertAccount(account){
     ACCOUNT_LIST.push(account);
@@ -15,7 +16,14 @@ function updateAccount(searchId, newAccountData){
     });
 }
 
+
+function getAccountById(searchId) {
+    return ACCOUNT_LIST.find(({ id }) => id === searchId);
+}
+
+
 export const commandDAO = {
     insertAccount,
-    updateAccount
+    updateAccount,
+    getAccountById,
 }

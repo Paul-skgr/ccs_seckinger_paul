@@ -1,6 +1,5 @@
 import { Account } from "./account.mjs";
 import { commandDAO } from "./accountCommandDAO.mjs";
-import { accountQuery } from "./accountQuery.mjs";
 import { ACCOUNT_LIST } from "./database.mjs";
 import { queryDatabase } from "./queryDatabase.mjs";
 import { accountCache } from "./cache.mjs";
@@ -20,7 +19,7 @@ function addAccount(lastName, firstName) {
 
 
 function saveAccount(id,  lastName, firstName){
-    const newAccountData = accountQuery.getAccount(id);
+    const newAccountData = commandDAO.getAccountById(id);
     newAccountData.lastName = lastName;
     newAccountData.firstName = firstName;
     const queryAccount = { lastName, firstName };
