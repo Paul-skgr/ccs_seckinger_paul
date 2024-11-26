@@ -1,0 +1,10 @@
+@import 'variables.css';
+
+footer {
+    color: var(--main-color);
+    border:  var(--border);
+    font-size: 12px;
+    padding: var(--space-fine);
+    margin: var(--space-large);
+    text-align: start;
+}

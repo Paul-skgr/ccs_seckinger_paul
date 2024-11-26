@@ -1,0 +1,10 @@
+@import 'variables.css';
+
+header {
+    color: var(--main-color);
+    border: var(--border);
+    font-size: clamp(20,3rem,80);
+    padding: var(--space-medium);
+    margin: var(--space-large);
+    height: 10rem;
+}
